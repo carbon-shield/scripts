@@ -6,7 +6,7 @@ UPLOAD_DIR=${TOPBUILDDIR}/uploads/$(date +%Y%m%d)
 declare -a BUILDDEVICES=("roth" "shieldtablet")
 
 mkdir -p ${UPLOAD_DIR}
-for dev in "$BUILDDEVICES{[@]}"
+for dev in "${BUILDDEVICES[@]}"
 do
 	mkdir -p ${UPLOAD_DIR}/${dev}
 	cp ${CM_OUT_DIR}/${dev}/cm-12*-UNOFFICIAL-${dev}.zip ${UPLOAD_DIR}/${dev}/;
