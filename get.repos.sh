@@ -21,5 +21,6 @@ if [ ! -d ${TWRPDIR} ]; then
 	cd ${TWRPDIR};
 	repo init -u git://github.com/notyal/twrp_recovery_manifest.git -b ${TWRPBRANCH}
 	cp ${MANIFESTDIR}/omni/*.xml ${TWRPDIR}/.repo/local_manifests/
+	sed -i '/recovery/d' ${TWRPDIR}/.repo/manifest.xml
 	repo sync -j5
 fi;
