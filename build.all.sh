@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# Check parameter validity
+if [ ! -z "$1" ] && [ ! "$1" == "cm" ] && [ ! "$1" == "twrp" ]; then
+	echo "Usage: $0 [cm OR twrp]";
+	exit 1;
+fi;
+
+# Default list of devices
+declare -a BUILDDEVICES=("roth" "shieldtablet");
+
 # Store current working directory
 OLDPWD=$(pwd);
 
@@ -13,10 +22,26 @@ done
 TOPBUILDDIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 export TOPBUILDDIR="$(dirname "${TOPBUILDDIR}")"
 
-sh ./get.repos.sh
-sh ./build.cm.sh
-sh ./build.twrp.sh
-sh ./copy.files.sh
+# Create device list if it doesn't exist.
+if [ ! -f $TOPBUILDDIR/scripts/devices.txt ]; then
+	for dev in "${BUILDDEVICES[@]}"
+	do
+		echo ${dev} >> $TOPBUILDDIR/scripts/devices.txt;
+	done;
+fi;
+
+#sh ./get.repos.sh
+
+if [ -z "$1" ]; then
+	sh ./build.cm.sh
+	sh ./build.twrp.sh
+elif [ "$1" == "cm" ]; then
+	sh ./build.cm.sh
+elif [ "$1" == "twrp" ]; then
+	sh ./build.twrp.sh
+fi;
+
+#sh ./copy.files.sh
 
 cd ${OLDPWD}
 

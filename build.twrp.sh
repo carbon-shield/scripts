@@ -20,34 +20,31 @@ while read -r patch pdir; do
 	git apply ${PATCHDIR}/${patch}.patch
 done < ${PATCHDIR}/patches_twrp.txt;
 
-cd ${BASEDIR}
-for dev in "shieldtablet"
-do
+while read -r dev; do
+	# Special handling, if needed
+	if [ -f ${PATCHDIR}/patches_twrp_${dev}.txt ]; then
+		while read -r patch pdir; do
+			echo Applying ${patch};
+			cd ${BASEDIR}/${pdir};
+			git apply ${PATCHDIR}/${patch}.patch
+		done < ${PATCHDIR}/patches_twrp_${dev}.txt;
+	fi;
+
+	# Build
+	cd ${BASEDIR}
 	lunch full_${dev}-${BUILDTYPE}
 	make -j9 recoveryimage multirom_zip
-done
 
-# Special handling
-while read -r patch pdir; do
-	echo Applying ${patch};
-	cd ${BASEDIR}/${pdir};
-	git apply ${PATCHDIR}/${patch}.patch
-done < ${PATCHDIR}/patches_twrp_special.txt;
-
-cd ${BASEDIR}
-for dev in "roth"
-do
-	lunch full_${dev}-${BUILDTYPE}
-	make -j9 recoveryimage multirom_zip
-done
-
-# Revert special handling
-tempvar=$(tac ${PATCHDIR}/patches_twrp_special.txt);
-while read -r patch pdir; do
-	echo Reverting ${patch};
-	cd ${BASEDIR}/${pdir};
-	git apply -R ${PATCHDIR}/${patch}.patch
-done <<< "${tempvar}";
+	# Revert special handling, if needed
+	if [ -f ${PATCHDIR}/patches_twrp_${dev}.txt ]; then
+		tempvar=$(tac ${PATCHDIR}/patches_twrp_${dev}.txt);
+		while read -r patch pdir; do
+			echo Reverting ${patch};
+			cd ${BASEDIR}/${pdir};
+			git apply -R ${PATCHDIR}/${patch}.patch
+		done <<< "${tempvar}";
+	fi;
+done < ${TOPBUILDDIR}/scripts/devices.txt;
 
 # Revert patches
 tempvar=$(tac ${PATCHDIR}/patches_twrp.txt);
