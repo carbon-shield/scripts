@@ -30,7 +30,7 @@ if [ ! -f $TOPBUILDDIR/scripts/devices.txt ]; then
 	done;
 fi;
 
-#sh ./get.repos.sh
+sh ./get.repos.sh
 
 if [ -z "$1" ]; then
 	sh ./build.cm.sh
@@ -41,7 +41,7 @@ elif [ "$1" == "twrp" ]; then
 	sh ./build.twrp.sh
 fi;
 
-#sh ./copy.files.sh
+sh ./copy.files.sh
 
 cd ${OLDPWD}
 
