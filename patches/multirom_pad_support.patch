@@ -1,0 +1,57 @@
+diff --git a/device_defines.mk b/device_defines.mk
+index 76518e0..e36a10c 100644
+--- a/device_defines.mk
++++ b/device_defines.mk
+@@ -110,3 +110,14 @@ endif
+ ifneq ($(MR_RD_ADDR),)
+     LOCAL_CFLAGS += -DMR_RD_ADDR=$(MR_RD_ADDR)
+ endif
++
++# Default gamepad keys
++ifneq ($(MR_PAD_UP),)
++    LOCAL_CFLAGS += -DMR_PAD_UP=$(MR_PAD_UP)
++endif
++ifneq ($(MR_PAD_DOWN),)
++    LOCAL_CFLAGS += -DMR_PAD_DOWN=$(MR_PAD_DOWN)
++endif
++ifneq ($(MR_PAD_CONFIRM),)
++    LOCAL_CFLAGS += -DMR_PAD_CONFIRM=$(MR_PAD_CONFIRM)
++endif
+diff --git a/lib/input.c b/lib/input.c
+index 6617e81..4bf6172 100644
+--- a/lib/input.c
++++ b/lib/input.c
+@@ -171,7 +171,11 @@ static int ev_get(struct input_event *ev, unsigned dont_wait)
+     return -1;
+ }
+ 
++#if !defined(MR_PAD_CONFIRM) || !defined(MR_PAD_UP) || !defined(MR_PAD_CONFIRM)
+ #define IS_KEY_HANDLED(key) (key >= KEY_VOLUMEDOWN && key <= KEY_POWER)
++#else
++#define IS_KEY_HANDLED(key) (1)
++#endif
+ 
+ static int screenshot_trigger_handle_keyevent(int code, int pressed)
+ {
+@@ -730,12 +734,21 @@ int keyaction_handle_keyevent(int key, int press)
+     switch(key)
+     {
+         case KEY_POWER:
++#ifdef MR_PAD_CONFIRM
++        case MR_PAD_CONFIRM:
++#endif
+             act = KEYACT_CONFIRM;
+             break;
+         case KEY_VOLUMEDOWN:
++#ifdef MR_PAD_DOWN
++        case MR_PAD_DOWN:
++#endif
+             act = KEYACT_DOWN;
+             break;
+         case KEY_VOLUMEUP:
++#ifdef MR_PAD_UP
++        case MR_PAD_UP:
++#endif
+             act = KEYACT_UP;
+             break;
+     }

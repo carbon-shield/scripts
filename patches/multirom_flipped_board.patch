@@ -1,0 +1,31 @@
+diff --git a/device_defines.mk b/device_defines.mk
+index ef36b88..76518e0 100644
+--- a/device_defines.mk
++++ b/device_defines.mk
+@@ -14,6 +14,10 @@ ifneq ($(TW_DEFAULT_ROTATION),)
+ endif
+ LOCAL_CFLAGS += -DMULTIROM_DEFAULT_ROTATION=$(MULTIROM_DEFAULT_ROTATION)
+ 
++ifeq ($(BOARD_HAS_FLIPPED_SCREEN), true)
++    LOCAL_CFLAGS += -DBOARD_HAS_FLIPPED_SCREEN
++endif
++
+ # TWRP framebuffer flags
+ ifeq ($(RECOVERY_GRAPHICS_USE_LINELENGTH), true)
+     LOCAL_CFLAGS += -DRECOVERY_GRAPHICS_USE_LINELENGTH
+diff --git a/lib/input.c b/lib/input.c
+index f7719f8..6617e81 100644
+--- a/lib/input.c
++++ b/lib/input.c
+@@ -221,7 +221,11 @@ int calc_mt_pos(int val, int *range, int d_max)
+ 
+ static void mt_recalc_pos_rotation(touch_event *ev)
+ {
++#ifdef BOARD_HAS_FLIPPED_SCREEN
++    switch((fb_rotation + 180) % 360)
++#else
+     switch(fb_rotation)
++#endif
+     {
+         case 0:
+             ev->x = ev->orig_x;

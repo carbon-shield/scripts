@@ -1,0 +1,5 @@
+multirom_flipped_board	system/extras/multirom
+multirom_pad_support	system/extras/multirom
+multirom_kexec_dtb_partition	system/extras/multirom/kexec-tools
+multirom_kexec_tegra	system/extras/multirom/kexec-tools
+multirom_kexec_tegra4	system/extras/multirom/kexec-tools

@@ -1,0 +1,63 @@
+diff --git a/wifi/java/android/net/wifi/p2p/IWifiP2pManager.aidl b/wifi/java/android/net/wifi/p2p/IWifiP2pManager.aidl
+index ee2e895..fa67f22 100644
+--- a/wifi/java/android/net/wifi/p2p/IWifiP2pManager.aidl
++++ b/wifi/java/android/net/wifi/p2p/IWifiP2pManager.aidl
+@@ -28,5 +28,6 @@ interface IWifiP2pManager
+     Messenger getMessenger();
+     Messenger getP2pStateMachineMessenger();
+     void setMiracastMode(int mode);
++    boolean isAutonomousGroupOwner();
+ }
+ 
+diff --git a/wifi/java/android/net/wifi/p2p/WifiP2pManager.java b/wifi/java/android/net/wifi/p2p/WifiP2pManager.java
+index 6409450..374bf0b 100644
+--- a/wifi/java/android/net/wifi/p2p/WifiP2pManager.java
++++ b/wifi/java/android/net/wifi/p2p/WifiP2pManager.java
+@@ -1018,6 +1018,31 @@ public class WifiP2pManager {
+     }
+ 
+     /**
++     * Create a p2p group with the current device as the group owner. This essentially creates
++     * an access point that can accept connections from legacy clients as well as other p2p
++     * devices.
++     *
++     * <p class="note"><strong>Note:</strong>
++     * This function would normally not be used unless the current device needs
++     * to form a p2p connection with a legacy client
++     *
++     * <p> The function call immediately returns after sending a group creation request
++     * to the framework. The application is notified of a success or failure to initiate
++     * group creation through listener callbacks {@link ActionListener#onSuccess} or
++     * {@link ActionListener#onFailure}.
++     *
++     * <p> Application can request for the group details with {@link #requestGroupInfo}.
++     *
++     * @param c is the channel created at {@link #initialize}
++     * @param mNetId is the net id
++     * @param listener for callbacks on success or failure. Can be null.
++     */
++    public void createGroup(Channel c, int mNetId, ActionListener listener) {
++        checkChannel(c);
++        c.mAsyncChannel.sendMessage(CREATE_GROUP, mNetId, c.putListener(listener));
++    }
++
++    /**
+      * Remove the current p2p group.
+      *
+      * <p> The function call immediately returns after sending a group removal request
+@@ -1367,6 +1392,15 @@ public class WifiP2pManager {
+         }
+     }
+ 
++    /** @hide */
++    public boolean isAutonomousGroupOwner() {
++        try {
++            return mService.isAutonomousGroupOwner();
++        } catch(RemoteException e) {
++            return false;
++        }
++    }
++
+     /**
+      * Get a reference to WifiP2pService handler. This is used to establish
+      * an AsyncChannel communication with WifiService

@@ -1,0 +1,18 @@
+diff --git a/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java b/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java
+index b15239e..5410819 100644
+--- a/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java
++++ b/service/java/com/android/server/wifi/p2p/WifiP2pServiceImpl.java
+@@ -462,6 +462,13 @@ public final class WifiP2pServiceImpl extends IWifiP2pManager.Stub {
+         mP2pStateMachine.sendMessage(SET_MIRACAST_MODE, mode);
+     }
+ 
++    /** This is used to provide the information that there is an active autonomous GO and
++      * applications should call create/remove p2p interface accordingly
++      */
++    public boolean isAutonomousGroupOwner() {
++        return mAutonomousGroup;
++    }
++
+     @Override
+     protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
+         if (mContext.checkCallingOrSelfPermission(android.Manifest.permission.DUMP)
