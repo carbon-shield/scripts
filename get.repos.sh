@@ -11,6 +11,7 @@ if [ ! -d ${CMDIR} ]; then
 	mkdir ${CMDIR};
 	cd ${CMDIR};
 	repo init -u git://github.com/CyanogenMod/android.git -b ${CMBRANCH}
+	mkdir -p ${CMDIR}/.repo/local_manifests
 	cp ${MANIFESTDIR}/cm/*.xml ${CMDIR}/.repo/local_manifests/
 	repo sync -j5
 fi;
@@ -20,6 +21,7 @@ if [ ! -d ${TWRPDIR} ]; then
 	mkdir ${TWRPDIR};
 	cd ${TWRPDIR};
 	repo init -u git://github.com/notyal/twrp_recovery_manifest.git -b ${TWRPBRANCH}
+	mkdir -p ${TWRPDIR}/.repo/local_manifests
 	cp ${MANIFESTDIR}/omni/*.xml ${TWRPDIR}/.repo/local_manifests/
 	sed -i '/recovery/d' ${TWRPDIR}/.repo/manifest.xml
 	repo sync -j5
