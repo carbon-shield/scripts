@@ -6,7 +6,6 @@ UPLOAD_DIR=${TOPBUILDDIR}/uploads/$(date +%Y%m%d)
 
 mkdir -p ${UPLOAD_DIR}
 while read -r dev; do
-do
 	mkdir -p ${UPLOAD_DIR}/${dev}
 	cp ${CM_OUT_DIR}/${dev}/cm-12*-UNOFFICIAL-${dev}.zip ${UPLOAD_DIR}/${dev}/;
 	BDATE=$(basename ${TWRP_OUT_DIR}/${dev}/multirom-*-UNOFFICIAL-${dev}.zip |awk -F '[-]' '{ print $2 }');
