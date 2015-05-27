@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 MANIFESTDIR=${TOPBUILDDIR}/scripts/manifests
 CMDIR=${TOPBUILDDIR}/cm

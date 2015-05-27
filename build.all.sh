@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Check parameter validity
 if [ ! -z "$1" ] && [ ! "$1" == "cm" ] && [ ! "$1" == "twrp" ]; then

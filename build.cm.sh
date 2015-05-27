@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 OLD_PWD=$(pwd)
 BASEDIR=${TOPBUILDDIR}/cm

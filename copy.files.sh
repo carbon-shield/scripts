@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CM_OUT_DIR=${TOPBUILDDIR}/cm/out/target/product
 TWRP_OUT_DIR=${TOPBUILDDIR}/omni_min/out/target/product
