@@ -10,3 +10,5 @@ These scripts expect to be in the script subdirectory of the build area, such as
 The main build script (build.all.sh) will clone everything else as needed. Simply clone this repo and run build.all.sh. After everything is synced and build, the output will be in the uploads directory.
 
 If you wish to build for only specific devices, create or edit devices.txt in this folder and put the device name(s) (one per line) as listed above in there. The scripts will create this file if it doesn't exist and put all available devices in it. If you want to build only cm or twrp/multirom, run 'build.all.sh cm' or 'build.all.sh twrp' respectively.
+
+Note: These scripts will overwrite the local manifests every time. If there is an error syncing, run 'rm -rf .repo/manifest*' from that repo directory and the scripts will set everything back up.

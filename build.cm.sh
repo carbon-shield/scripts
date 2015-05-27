@@ -10,11 +10,8 @@ OLD_PWD=$(pwd)
 BASEDIR=${TOPBUILDDIR}/cm
 PATCHDIR=${TOPBUILDDIR}/scripts/patches
 BUILDTYPE=userdebug
-declare -a BUILDDEVICES=("roth" "shieldtablet")
 
 cd ${BASEDIR}
-repo sync -j5
-
 source build/envsetup.sh
 export USE_CCACHE=1
 export CCACHE_DIR=${BASEDIR}/ccache

@@ -12,8 +12,6 @@ PATCHDIR=${TOPBUILDDIR}/scripts/patches
 BUILDTYPE=userdebug
 
 cd ${BASEDIR}
-repo sync -j5
-
 source build/envsetup.sh
 export USE_CCACHE=1
 export CCACHE_DIR=${BASEDIR}/ccache
