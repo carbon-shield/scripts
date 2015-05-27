@@ -6,6 +6,10 @@ if [ ! -z "$1" ] && [ ! "$1" == "cm" ] && [ ! "$1" == "twrp" ]; then
 	exit 1;
 fi;
 
+# Check for needed programs
+command -v repo >/dev/null 2>&1 || { echo >&2 "repo is required, but not installed. Aborting."; exit 1; }
+command -v abootimg >/dev/null 2>&1 || { echo >&2 "abootimg is required, but not installed. Aborting."; exit 1; }
+
 # Default list of devices
 declare -a BUILDDEVICES=("roth" "shieldtablet");
 
@@ -30,18 +34,18 @@ if [ ! -f $TOPBUILDDIR/scripts/devices.txt ]; then
 	done;
 fi;
 
-sh ./get.repos.sh
+./get.repos.sh
 
 if [ -z "$1" ]; then
-	sh ./build.cm.sh
-	sh ./build.twrp.sh
+	./build.cm.sh
+	./build.twrp.sh
 elif [ "$1" == "cm" ]; then
-	sh ./build.cm.sh
+	./build.cm.sh
 elif [ "$1" == "twrp" ]; then
-	sh ./build.twrp.sh
+	./build.twrp.sh
 fi;
 
-sh ./copy.files.sh
+./copy.files.sh
 
 cd ${OLDPWD}
 
