@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -z ${TOPBUILDDIR} ]; then
+	echo "This script is not intended to be run directly."
+	echo "Please run \"build.all.sh twrp\" to build only TWRP and MultiROM.";
+	exit 1;
+fi;
+
 OLD_PWD=$(pwd)
 BASEDIR=${TOPBUILDDIR}/omni_min
 PATCHDIR=${TOPBUILDDIR}/scripts/patches

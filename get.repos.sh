@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -z ${TOPBUILDDIR} ]; then
+	echo "This script is not intended to be run directly."
+	echo "Please run \"build.all.sh\".";
+	exit 1;
+fi;
+
 MANIFESTDIR=${TOPBUILDDIR}/scripts/manifests
 CMDIR=${TOPBUILDDIR}/cm
 CMBRANCH="cm-12.1"

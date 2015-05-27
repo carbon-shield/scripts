@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ -z ${TOPBUILDDIR} ]; then
+	echo "This script is not intended to be run directly."
+	echo "Please run \"build.all.sh\".";
+	exit 1;
+fi;
+
 CM_OUT_DIR=${TOPBUILDDIR}/cm/out/target/product
 TWRP_OUT_DIR=${TOPBUILDDIR}/omni_min/out/target/product
 UPLOAD_DIR=${TOPBUILDDIR}/uploads/$(date +%Y%m%d)
