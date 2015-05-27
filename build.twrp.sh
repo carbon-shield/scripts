@@ -34,6 +34,8 @@ while read -r dev; do
 	cd ${BASEDIR}
 	lunch full_${dev}-${BUILDTYPE}
 	make -j9 recoveryimage multirom_zip
+	BDATE=$(basename ${BASEDIR}/out/target/product/${dev}/multirom-*-UNOFFICIAL-${dev}.zip |awk -F '[-]' '{ print $2 }');
+	abootimg -u ${BASEDIR}/out/target/product/${dev}/recovery.img -c "name=mrom${BDATE}-01"
 
 	# Revert special handling, if needed
 	if [ -f ${PATCHDIR}/patches_twrp_${dev}.txt ]; then
