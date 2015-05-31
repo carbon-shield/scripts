@@ -42,7 +42,7 @@ if [ -z $1 ] || [ "$1" == "twrp" ]; then
 		REPOINIT="true";
 	else
 		cd ${TWRPDIR}
-		if [ "$(repo info manifest |grep merge |awk '{ print $4 }')" != "${TWRPBRANCH}" ]; then
+		if [ "$(repo info manifest |grep merge |awk '{ print $4 }' |awk -F'/' '{ print $3 }')" != "${TWRPBRANCH}" ]; then
 			REPOINIT="true";
 		fi;
 	fi;
