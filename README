@@ -4,6 +4,7 @@ Device Name	Description
 ------------	---------------
 roth		Shield Portable
 shieldtablet	Shield Tablet
+foster		Shield TV
 
 These scripts expect to be in the script subdirectory of the build area, such as $HOME/CM-Shield/scripts. Then CM would be in $HOME/CM-Shield/cm and the TWRP build directory would be $HOME/CM-Shield/omni_min.
 

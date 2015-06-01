@@ -11,7 +11,7 @@ command -v repo >/dev/null 2>&1 || { echo >&2 "repo is required, but not install
 command -v abootimg >/dev/null 2>&1 || { echo >&2 "abootimg is required, but not installed. Aborting."; exit 1; }
 
 # Default list of devices
-declare -a BUILDDEVICES=("roth" "shieldtablet");
+declare -a BUILDDEVICES=("roth" "shieldtablet" "foster");
 
 # Store current working directory
 OLDPWD=$(pwd);

@@ -7,9 +7,9 @@ index 5d32622..2ffe87d 100644
                                   kexec/arch/arm/mach-hammerhead.c \
                                   kexec/arch/arm/mach-shamu.c \
 +                                 kexec/arch/arm/mach-tegra.c \
-                                  kexec/arch/arm/crashdump-arm.c \
-                                  kexec/kexec-uImage.c kexec/purgatory.c \
-                                  kexec/fs2dt.c \
+                                  kexec/arch/arm/crashdump-arm.c
+ endif
+ LOCAL_FORCE_STATIC_EXECUTABLE := true
 diff --git a/kexec/arch/arm/mach-tegra.c b/kexec/arch/arm/mach-tegra.c
 new file mode 100644
 index 0000000..ee9fd73
