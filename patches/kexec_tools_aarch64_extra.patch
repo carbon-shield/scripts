@@ -18,7 +18,7 @@ index 5d32622..426beb4 100644
  LOCAL_SRC_FILES               := kexec/kexec.c kexec/ifdown.c \
                                   kexec/kexec-elf.c kexec/kexec-elf-exec.c \
                                   kexec/kexec-elf-core.c \
-@@ -34,24 +39,33 @@ LOCAL_SRC_FILES               := kexec/kexec.c kexec/ifdown.c \
+@@ -34,24 +39,34 @@ LOCAL_SRC_FILES               := kexec/kexec.c kexec/ifdown.c \
                                   kexec/crashdump.c kexec/crashdump-xen.c \
                                   kexec/phys_arch.c kexec/lzma.c \
                                   kexec/zlib.c kexec/proc_iomem.c \
@@ -50,10 +50,10 @@ index 5d32622..426beb4 100644
                                   kexec/arch/arm/kexec-arm.c \
                                   kexec/arch/arm/mach.c \
                                   kexec/arch/arm/mach-hammerhead.c \
+                                  kexec/arch/arm/mach-m8.c \
                                   kexec/arch/arm/mach-shamu.c \
 -                                 kexec/arch/arm/crashdump-arm.c \
 -                                 kexec/kexec-uImage.c kexec/purgatory.c \
--                                 kexec/fs2dt.c \
 -                                 kexec/libfdt/fdt.c kexec/libfdt/fdt_ro.c \
 -                                 kexec/libfdt/fdt_rw.c kexec/libfdt/fdt_strerror.c \
 -                                 kexec/libfdt/fdt_sw.c kexec/libfdt/fdt_wip.c
@@ -117,29 +117,28 @@ diff --git a/kexec/fs2dt.h b/kexec/fs2dt.h
 index cd85aee..f0ff002 100644
 --- a/kexec/fs2dt.h
 +++ b/kexec/fs2dt.h
-@@ -1,8 +1,7 @@
+@@ -1,6 +1,8 @@
  #ifndef FS2DT_H
  #define FS2DT_H
  
--#include "arch/arm/kexec-arm.h"
--#include "arch/arm/crashdump-arm.h"
 +#include <kexec-fs2dt.h>
- 
++
  #if (BOOT_BLOCK_VERSION != 2 && BOOT_BLOCK_VERSION != 17)
  #error Please add or correct definition of BOOT_BLOCK_VERSION
-diff --git a/kexec/kexec.h b/kexec/kexec.h
+ #endif
+diff --git a/kexec/arch/arm64/crashdump-arm64.h b/kexec/arch/arm64/crashdump-arm64.h
 index a7b67d1..d01a8b0 100644
---- a/kexec/kexec.h
-+++ b/kexec/kexec.h
-@@ -117,6 +117,11 @@ struct memory_range {
- #define RANGE_UNCACHED	4
- };
+--- a/kexec/arch/arm64/crashdump-arm64.h
++++ b/kexec/arch/arm64/crashdump-arm64.h
+@@ -16,6 +16,11 @@
+ 
+ #define CRASH_MAX_MEMORY_RANGES	32
  
 +struct memory_ranges {
 +        unsigned int size;
 +        struct memory_range *ranges;
 +};
 +
- struct kexec_info {
- 	struct kexec_segment *segment;
- 	int nr_segments;
+ extern struct memory_ranges usablemem_rgns;
+ extern struct memory_range crash_reserved_mem;
+ 
