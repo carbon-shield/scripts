@@ -1,1 +1,6 @@
 devices.txt
+*.log
+*.env
+*.func
+*~
+*.bak
