@@ -244,8 +244,10 @@ copy_outputs () {
 	# Local variables
 	CM_OUT_DIR=${CMDIR}/out/target/product;
 	TWRP_OUT_DIR=${TWRPDIR}/out/target/product;
-	export TZ=UTC;
+	ORIGTZ=${TZ};
+	TZ=UTC;
 	UPLOAD_DIR=${TOPBUILDDIR}/uploads/$(date +%Y%m%d);
+	TZ=${ORIGTZ};
 
 	logadd "Copying output files";
 
