@@ -252,6 +252,7 @@ copy_outputs () {
 	logadd "Copying output files";
 
 	mkdir -p ${UPLOAD_DIR};
+	cp ${TOPBUILDDIR}/scripts/build.log ${UPLOAD_DIR}/
 	while read -r dev; do
 		# Check if device is valid
 		if [ "$(ls -d ${BASEDIR}/device/*/${dev} 2>/dev/null |wc -l)" == "0" ]; then
