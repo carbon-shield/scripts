@@ -1,1 +1,2 @@
 roth_twrp_remove_unnecessary	bootable/recovery
+multirom_tadb	system/extras/multirom
