@@ -1,11 +1,34 @@
 diff --git a/core/tasks/kernel.mk b/core/tasks/kernel.mk
-index af1bf55..b8c8a42 100644
+index af1bf55..2fc0f2a 100644
 --- a/core/tasks/kernel.mk
 +++ b/core/tasks/kernel.mk
-@@ -155,6 +155,22 @@ ifeq ($(TARGET_ARCH),arm)
-     ccache = 
- endif
- 
+@@ -119,7 +119,7 @@ define mv-modules
+     if [ "$$mdpath" != "" ];then\
+         mpath=`dirname $$mdpath`;\
+         ko=`find $$mpath/kernel -type f -name *.ko`;\
+-        for i in $$ko; do $(ARM_EABI_TOOLCHAIN)/arm-eabi-strip --strip-unneeded $$i;\
++        for i in $$ko; do $(TARGET_KERNEL_TOOLCHAIN_PATH)strip --strip-unneeded $$i;\
+         mv $$i $(KERNEL_MODULES_OUT)/; done;\
+     fi
+ endef
+@@ -145,14 +145,35 @@ ifeq ($(TARGET_ARCH),arm)
+     endif
+     ifneq ($(TARGET_KERNEL_CUSTOM_TOOLCHAIN),)
+         ifeq ($(HOST_OS),darwin)
++            TARGET_KERNEL_TOOLCHAIN_PATH="$(ANDROID_BUILD_TOP)/prebuilts/gcc/darwin-x86/arm/$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)/bin/arm-eabi-"
+             ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/darwin-x86/arm/$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)/bin/arm-eabi-"
+         else
++            TARGET_KERNEL_TOOLCHAIN_PATH="$(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)/bin/arm-eabi-"
+             ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)/bin/arm-eabi-"
+         endif
+     else
++        TARGET_KERNEL_TOOLCHAIN_PATH="$(ARM_EABI_TOOLCHAIN)/arm-eabi-"
+         ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ARM_EABI_TOOLCHAIN)/arm-eabi-"
+     endif
+-    ccache = 
++    ccache =
++endif
++
 +ifeq ($(TARGET_ARCH),arm64)
 +ifneq ($(KERNEL_TOOLCHAIN_PREFIX),)
 +    ifneq ($(USE_CCACHE),)
@@ -14,14 +37,14 @@ index af1bf55..b8c8a42 100644
 +        ccache := $(strip $(wildcard $(ccache)))
 +    endif
 +    ifeq ($(HOST_OS),darwin)
++        TARGET_KERNEL_TOOLCHAIN_PATH="$(ANDROID_BUILD_TOP)/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-$(TARGET_GCC_VERSION)/bin/$(KERNEL_TOOLCHAIN_PREFIX)"
 +        ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-$(TARGET_GCC_VERSION)/bin/$(KERNEL_TOOLCHAIN_PREFIX)"
 +    else
++        TARGET_KERNEL_TOOLCHAIN_PATH="$(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-$(TARGET_GCC_VERSION)/bin/$(KERNEL_TOOLCHAIN_PREFIX)"
 +        ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-$(TARGET_GCC_VERSION)/bin/$(KERNEL_TOOLCHAIN_PREFIX)"
 +    endif
 +    ccache =
 +endif
-+endif
-+
- ifeq ($(HOST_OS),darwin)
-   MAKE_FLAGS := C_INCLUDE_PATH=$(ANDROID_BUILD_TOP)/external/elfutils/libelf
  endif
+ 
+ ifeq ($(HOST_OS),darwin)
