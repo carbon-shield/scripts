@@ -6,4 +6,3 @@ kexec_tools_aarch64_extra	system/extras/multirom/kexec-tools
 multirom_kexec_tegra	system/extras/multirom/kexec-tools
 multirom_kexec_tegra4	system/extras/multirom/kexec-tools
 adbd_aarch64	system/extras/multirom/adbd
-omni_build_aarch64	build
