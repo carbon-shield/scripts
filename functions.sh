@@ -40,6 +40,8 @@ ValidityCheck () {
 	# Check for needed programs
 	command -v repo >/dev/null 2>&1 || { echo >&2 "repo is required, but not installed. Aborting."; return 1; }
 	command -v abootimg >/dev/null 2>&1 || { echo >&2 "abootimg is required, but not installed. Aborting."; return 1; }
+	command -v gperf >/dev/null 2>&1 || { echo >&2 "gperf is required, but not installed. Aborting."; return 1; }
+	command -v bison >/dev/null 2>&1 || { echo >&2 "bison is required, but not installed. Aborting."; return 1; }
 
 	return 0;
 }
