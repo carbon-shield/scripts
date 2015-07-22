@@ -6,3 +6,4 @@ kexec_tools_aarch64_extra	system/extras/multirom/kexec-tools
 multirom_kexec_tegra	system/extras/multirom/kexec-tools
 multirom_kexec_tegra4	system/extras/multirom/kexec-tools
 adbd_aarch64	system/extras/multirom/adbd
+twrp_mount_ntfs_3g	bootable/recovery
