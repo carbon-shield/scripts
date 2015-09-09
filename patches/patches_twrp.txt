@@ -1,5 +1,6 @@
 multirom_flipped_board	system/extras/multirom
 multirom_pad_support	system/extras/multirom
+fix_layout	system/extras/multirom
 multirom_kexec_dtb_partition	system/extras/multirom/kexec-tools
 kexec_tools_aarch64	system/extras/multirom/kexec-tools
 kexec_tools_aarch64_extra	system/extras/multirom/kexec-tools
