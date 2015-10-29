@@ -1,3 +1,1 @@
-frameworks_base_shield	frameworks/base
-frameworks_opt_net_wifi_shield	frameworks/opt/net/wifi
 external_tinyalsa	external/tinyalsa

@@ -13,7 +13,7 @@ SetVars () {
 	# Set relevant global variables
 	MANIFESTDIR=${TOPBUILDDIR}/scripts/manifests;
 	CMDIR=${TOPBUILDDIR}/cm;
-	CMBRANCH="cm-12.1";
+	CMBRANCH="cm-13.0";
 	TWRPDIR=${TOPBUILDDIR}/omni_min;
 	TWRPBRANCH="android-5.1";
 	PATCHDIR=${TOPBUILDDIR}/scripts/patches;
@@ -164,6 +164,14 @@ build_android () {
 		if [ "${BUILDSYSTEM}" == "twrp" ]; then
 			BDATE=$(basename ${BASEDIR}/out/target/product/${dev}/multirom-*-UNOFFICIAL-${dev}.zip |awk -F '[-]' '{ print $2 }');
 			abootimg -u ${BASEDIR}/out/target/product/${dev}/recovery.img -c "name=mrom${BDATE}-01";
+		# Android M inserts a hash check on install to verify that the install was successful. This fails on multirom secondaries, so remove it.
+		elif [ "${BUILDSYSTEM}" == "cm" ]; then
+			cd ${BASEDIR}/out/target/product/${dev};
+			unzip cm-13*-UNOFFICIAL-${dev}.zip META-INF/com/google/android/updater-script;
+			sed -e '/Verifying the updated system image.../,+10d' META-INF/com/google/android/updater-script;
+			zip -u cm-13*-UNOFFICIAL-${dev}.zip META-INF/com/google/android/updater-script;
+			rm -rf META-INF;
+			cd ${BASEDIR};
 		fi;
 
 		# Revert special handling, if needed
@@ -265,7 +273,7 @@ copy_outputs () {
 		# Copy files. Ignore types that weren't built.
 		mkdir -p ${UPLOAD_DIR}/${dev};
 		if [ -z $1 ] || [ "$1" == "cm" ]; then
-			cp ${CM_OUT_DIR}/${dev}/cm-12*-UNOFFICIAL-${dev}.zip ${UPLOAD_DIR}/${dev}/;
+			cp ${CM_OUT_DIR}/${dev}/cm-13*-UNOFFICIAL-${dev}.zip ${UPLOAD_DIR}/${dev}/;
 		fi;
 		if [ -z $1 ] || [ "$1" == "twrp" ]; then
 			BDATE=$(basename ${TWRP_OUT_DIR}/${dev}/multirom-*-UNOFFICIAL-${dev}.zip |awk -F '[-]' '{ print $2 }');
