@@ -42,6 +42,7 @@ ValidityCheck () {
 	command -v abootimg >/dev/null 2>&1 || { echo >&2 "abootimg is required, but not installed. Aborting."; return 1; }
 	command -v gperf >/dev/null 2>&1 || { echo >&2 "gperf is required, but not installed. Aborting."; return 1; }
 	command -v bison >/dev/null 2>&1 || { echo >&2 "bison is required, but not installed. Aborting."; return 1; }
+	command -v sed >/dev/null 2>&1 || { echo >&2 "sed is required, but not installed. Aborting."; return 1; }
 
 	return 0;
 }
@@ -168,7 +169,7 @@ build_android () {
 		elif [ "${BUILDSYSTEM}" == "cm" ]; then
 			cd ${BASEDIR}/out/target/product/${dev};
 			unzip cm-13*-UNOFFICIAL-${dev}.zip META-INF/com/google/android/updater-script;
-			sed -e '/Verifying the updated system image.../,+10d' META-INF/com/google/android/updater-script;
+			sed -ie '/Verifying the updated system image.../,+10d' META-INF/com/google/android/updater-script;
 			zip -u cm-13*-UNOFFICIAL-${dev}.zip META-INF/com/google/android/updater-script;
 			rm -rf META-INF;
 			cd ${BASEDIR};
