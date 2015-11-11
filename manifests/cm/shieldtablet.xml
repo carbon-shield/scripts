@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+	<remove-project path="device/nvidia/shieldtablet" name="CyanogenMod/android_device_nvidia_shieldtablet" />
 	<project name="CM-Shield/android_device_nvidia_shieldtablet" path="device/nvidia/shieldtablet" remote="github" revision="cm-12.1" />
+	<remove-project path="kernel/nvidia/shieldtablet" name="CyanogenMod/android_kernel_nvidia_shieldtablet" />
 	<project name="CM-Shield/android_kernel_nvidia_shieldtablet" path="kernel/nvidia/shieldtablet" remote="github" revision="cm-12.1" />
 </manifest>
