@@ -220,6 +220,7 @@ update_twrp () {
 	if [ "${REPOINIT}" == "true" ]; then
 		logadd "(Re)Initializing TWRP repo";
 		repo init -u git://github.com/notyal/twrp_recovery_manifest.git -b ${TWRPBRANCH};
+		sed -i 's|.*default revision.*|  <default revision="refs/tags/android-5.1.1_r12"|' ${TWRPDIR}/.repo/manifest.xml
 	fi;
 
 	# Update the repo
