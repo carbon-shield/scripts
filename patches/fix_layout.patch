@@ -96,13 +96,6 @@ index 92f0fc7..1ab8630 100644
              // franco.Kernel includes script init.fk.sh which remounts /system as read only
              // comment out lines with mount and /system in all .sh scripts in /
              if(strendswith(dt->d_name, ".sh"))
-diff --git a/kexec-tools b/kexec-tools
-index 1945c66..f439cc8 160000
---- a/kexec-tools
-+++ b/kexec-tools
-@@ -1 +1 @@
--Subproject commit 1945c661d8b117297d3ac44ea071556298c31ec3
-+Subproject commit f439cc8a86fab9eefd7825e265261abc18d1974e
 diff --git a/version.h b/version.h
 index 245eb78..b9d2f83 100644
 --- a/version.h
