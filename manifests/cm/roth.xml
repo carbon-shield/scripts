@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-	<remove-project path="device/nvidia/roth" name="CyanogenMod/android_device_nvidia_roth" />
 	<project name="CM-Shield/android_device_nvidia_roth" path="device/nvidia/roth" remote="github" revision="cm-12.1" />
-	<remove-project path="kernel/nvidia/roth" name="CyanogenMod/android_kernel_nvidia_roth" />
 	<project name="CM-Shield/android_kernel_nvidia_roth" path="kernel/nvidia/roth" remote="github" revision="cm-12.1" />
 </manifest>
