@@ -1,11 +1,11 @@
 multirom_flipped_board	system/extras/multirom
 multirom_pad_support	system/extras/multirom
+multirom_aarch64	system/extras/multirom
 fix_layout	system/extras/multirom
-multirom_kexec_dtb_partition	system/extras/multirom/kexec-tools
-kexec_tools_aarch64	system/extras/multirom/kexec-tools
-kexec_tools_aarch64_extra	system/extras/multirom/kexec-tools
-multirom_kexec_tegra	system/extras/multirom/kexec-tools
-multirom_kexec_tegra4	system/extras/multirom/kexec-tools
 adbd_aarch64	system/extras/multirom/adbd
 twrp_mount_ntfs_3g	bootable/recovery
 twrp_compile	bootable/recovery
+0001-Add-kexec-hardboot-options	system/extras/multirom/kexec-tools
+0002-Revert-ifdown-really-set-down-all-active-interfaces	system/extras/multirom/kexec-tools
+0003-Fix-compile-on-Android	system/extras/multirom/kexec-tools
+0004-Add-config	system/extras/multirom/kexec-tools
