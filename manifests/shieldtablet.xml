@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+        <remote name="shield-xosp"
+        fetch="git://github.com/carbon-shield"
+        revision="xosp-mm" />
+        <remote name="shield"
+        fetch="git://github.com/carbon-shield"
+        revision="cr-4.0" />
+        <remote name="shield-cm"
+        fetch="git://github.com/carbon-shield"
+        revision="cm-13.0" />
+        <remote name="steel"
+        fetch="https://gitlab.incom.co/CM-Shield"
+        revision="cm-13.0" />
+
+        <project name="android_device_nvidia_shieldtablet" path="device/nvidia/shieldtablet" remote="shield-xosp" />
+        <project name="android_device_nvidia_shield-common" path="device/nvidia/shield-common" remote="shield" />
+        <project name="android_kernel_nvidia_shieldtablet" path="kernel/nvidia/shield" remote="shield" />
+        <project name="proprietary_vendor_nvidia" path="vendor/nvidia" remote="shield-cm" />
+        <project name="android_hardware_nvidia_power" path="hardware/nvidia/power" remote="shield-cm" />
+
+</manifest>

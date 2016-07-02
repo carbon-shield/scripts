@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<manifest>
-	<remove-project path="bootable/recovery" name="android_bootable_recovery" />
-	<project name="Tasssadar/Team-Win-Recovery-Project" path="bootable/recovery" remote="github" revision="master" />
-	<project name="Tasssadar/multirom" path="system/extras/multirom" remote="github" revision="master" />
-	<project name="Tasssadar/multirom_adbd" path="system/extras/multirom/adbd" remote="github" revision="master" />
-	<project name="Tasssadar/kexec-tools" path="system/extras/multirom/kexec-tools" remote="github" revision="master" />
-	<project name="Tasssadar/libbootimg" path="system/extras/libbootimg" remote="github" revision="master" />
-</manifest>

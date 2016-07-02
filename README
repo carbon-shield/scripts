@@ -1,4 +1,4 @@
-These scripts and patches are to build CyanogenMod, Multirom, and Multirom enabled TWRP for the Nvidia Shield devices. Currently supported are:
+These scripts and patches are to build CyanogenMod (and other ROMs), Multirom, and Multirom enabled TWRP for the Nvidia Shield devices. Currently supported are:
 
 Device Name	Description
 ------------	---------------
@@ -6,7 +6,7 @@ roth		Shield Portable
 shieldtablet	Shield Tablet
 foster		Shield TV
 
-These scripts expect to be in the script subdirectory of the build area, such as $HOME/CM-Shield/scripts. Then CM would be in $HOME/CM-Shield/cm and the TWRP build directory would be $HOME/CM-Shield/omni_min.
+These scripts expect to be in the script subdirectory of the build area, such as $HOME/carbon-shield/scripts. Then CM would be in $HOME/carbon-shield/cm and the TWRP build directory would be $HOME/carbon-shield/omni_min.
 
 The main build script (build.sh) will clone everything else as needed. Simply clone this repo and run build.sh. After everything is synced and build, the output will be in the uploads directory.
 
